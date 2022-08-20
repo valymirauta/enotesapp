@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="user/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card paint-card">
+                    <div class="card-body">
+                        <form th:action="@{/saveUser}" method="post">
+
+                            <p class="fs-4 text-center">View profile</p>
+
+                            <div class="form-group  mt-2">
+                                <label for="">Name</label>
+                                <input type="text" name="name" id="" th:value="${user.name}" class="form-control" required="required" readonly >
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label for="">Email</label>
+                                <input type="email" name="email" id="" th:value="${user.email}" class="form-control" required="required" readonly>
+                            </div>
+
+                            <div class="form-group mt-2 ">
+                                <textarea name="about" id="" cols="" rows="3"  th:value="${user.about}"  class="form-control"  placeholder="Enter About" readonly>[[${user.about}]]</textarea>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="col-md-6">
+            <div class="card paint-card">
+                <div class="card-body">
+                    <form th:action="@{/user/updateUser}" method="post">
+
+                        <p class="fs-4 text-center">Edit profile</p>
+
+                        <div th:if="${session.msg}" class="text-center" role="alert">
+                            <h4 class="text-success" th:text="${session.msg}"></h4>
+                            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                        </div>
+
+                        <div class="form-group  mt-2">
+                            <label for="">Enter Name</label>
+                            <input type="text" name="name" th:value="${user.name}" id="" class="form-control" required="required">
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="">Enter Email</label>
+                            <input type="email" name="email" th:value="${user.email}" id="" class="form-control" required="required" readonly>
+                        </div>
+
+                        <div class="form-group mt-2 ">
+                            <textarea name="about" id="" cols="" rows="3" th:value="${user.about}" class="form-control"  placeholder="Enter About">[[${user.about}]]</textarea>
+                        </div>
+
+                        <input type="hidden" name="id" th:value="${user.id}">
+
+                        <div class="text-center mt-3">
+                            <button class="btn bg-primary text-white">Update</button>
+                            <button type="reset" class="btn btn-primary text-white">Reset</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
